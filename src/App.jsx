@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import "./currency.scss";
-import _ from "lodash";
 import axios from "axios";
 import CurrencyResult from "./components/CurrencyResult";
 import CurrencyRate from "./components/CurrencyRate";
@@ -27,6 +26,7 @@ function App() {
     } else {
       setResultFull(false);
     }
+    // eslint-disable-next-line 
   }, [isResultFull, currencyFrom, currencyTo, currencyAmmount]);
 
   function fetchData() {
