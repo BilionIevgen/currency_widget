@@ -62,7 +62,7 @@ function App() {
 
   const onAmountInput = (val) => {
     val = val.target.value.trim();
-    var reg = new RegExp('^[1-9]*$');
+    var reg = new RegExp('^[1-9][0-9]*$');
     if (val && !reg.test(val)) {
       setInputError(true);
     } else {
