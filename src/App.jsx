@@ -14,8 +14,8 @@ function App() {
   const [isResultFull, setResultFull] = useState(false);
   const [inputError, setInputError] = useState(false);
 
-  useEffect( async() => {
-    const areInputsFull = currencyFrom && currencyTo && currencyAmmount
+  useEffect( () => {
+    const areInputsFull = currencyFrom && currencyTo && currencyAmmount;
     if (
       !inputError &&
       areInputsFull &&
@@ -26,33 +26,41 @@ function App() {
 
       // showing result field:
       setResultFull(areInputsFull);
-      
+
       // cleaning states:
       setRate("");
       setResult("");
 
       // request data from server
-      const response = await fetchData(currencyFrom);
-      // imitating bad internet
-      setTimeout(() => {
-        setIsFetching(false);
-      }, 1000);
+      async function fetch() {
+        // You can await here
+        const response = await fetchData(currencyFrom);
+        // imitating bad internet
+        setTimeout(() => {
+          setIsFetching(false);
+        }, 1000);
 
-      // checking if currency from and to are equal
-      const rate = currencyFrom === currencyTo ? 1 : +response.rates[currencyTo].toFixed(2);
-      
-      //setting result state
-      setRate(rate);
-      setResult(
-        new Intl.NumberFormat().format(
-          (rate * currencyAmmount).toFixed(2)
-        ) + ` ${currencyTo}`
-      );
+        // checking if currency from and to are equal
+        const rate =
+          currencyFrom === currencyTo
+            ? 1
+            : +response.rates[currencyTo].toFixed(2);
+
+        //setting result state
+        setRate(rate);
+        setResult(
+          new Intl.NumberFormat().format((rate * currencyAmmount).toFixed(2)) +
+            ` ${currencyTo}`
+        );
+      }
+      fetch();
     } else {
       setResultFull(false);
     }
     // eslint-disable-next-line
   }, [isResultFull, currencyFrom, currencyTo, currencyAmmount]);
+
+  // function fetchingData
 
   const onFromSelect = (val) => {
     setFrom(() => val);
