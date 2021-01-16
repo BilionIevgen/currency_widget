@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import "./currency.scss";
-import axios from "axios";
 import CurrencyResult from "./components/CurrencyResult";
 import CurrencyRate from "./components/CurrencyRate";
+import { fetchData } from "./api/request";
 
 function App() {
   const [currencyFrom, setFrom] = useState("");
@@ -14,43 +14,46 @@ function App() {
   const [isResultFull, setResultFull] = useState(false);
   const [inputError, setInputError] = useState(false);
 
-  // request data from server
-  useEffect(() => {
-    if (!inputError && currencyFrom && currencyTo && currencyAmmount) {
+  useEffect(async () => {
+    const areInputsFull = currencyFrom && currencyTo && currencyAmmount
+    if (
+      !inputError &&
+      areInputsFull &&
+      currencyAmmount[currencyAmmount.length - 1] !== "."
+    ) {
+      // showing preloader:
       setIsFetching(true);
-      setResultFull(currencyFrom && currencyTo && currencyAmmount);
+
+      // showing result field:
+      setResultFull(areInputsFull);
+      
+      // cleaning states:
       setRate("");
       setResult("");
+
+      // request data from server
+      const response = await fetchData(currencyFrom);
+
       // imitating bad internet
-      fetchData();
+      setTimeout(() => {
+        setIsFetching(false);
+      }, 1000);
+
+      // checking if currency from and to are equal
+      const rate = currencyFrom == currencyTo ? 1 : +response.rates[currencyTo].toFixed(2);
+      
+      //setting result state
+      setRate(rate);
+      setResult(
+        new Intl.NumberFormat().format(
+          (rate * currencyAmmount).toFixed(2)
+        ) + ` ${currencyTo}`
+      );
     } else {
       setResultFull(false);
     }
-    // eslint-disable-next-line 
+    // eslint-disable-next-line
   }, [isResultFull, currencyFrom, currencyTo, currencyAmmount]);
-
-  function fetchData() {
-    axios
-      .get(`https://api.exchangeratesapi.io/latest?base=${currencyFrom}`)
-      .then(function (response) {
-        // handle success
-        setTimeout(() => {
-          setIsFetching(false);
-        }, 1000);
-        const rate = +response.data.rates[currencyTo].toFixed(8);
-        setRate(rate);
-        setResult(
-          (+response.data.rates[currencyTo] * currencyAmmount).toFixed(6) +
-            ` ${currencyTo}`
-        );
-        
-         
-      })
-      .catch(function (error) {
-        // handle error
-        console.log(error);
-      });
-  }
 
   const onFromSelect = (val) => {
     setFrom(() => val);
@@ -61,14 +64,18 @@ function App() {
   };
 
   const onAmountInput = (val) => {
-    val = val.target.value.trim();
-    var reg = new RegExp('^[1-9][0-9]*$');
-    if (val && !reg.test(val)) {
+    const newVal = val.target.value.trim();
+    if (isNaN(newVal)) {
       setInputError(true);
+      setAmmount(val.target.value);
     } else {
       setInputError(false);
+      if (newVal.length > 0 && newVal[newVal.length - 1] !== ".") {
+        setAmmount(parseFloat(newVal));
+      } else {
+        setAmmount(newVal);
+      }
     }
-    setAmmount(val);
   };
 
   return (

@@ -90,12 +90,13 @@
         display: flex;
         justify-content: space-around;
         padding-top: 25px;
+        padding-left: 30px;
         .result_rate{
-            width: 40%;
-            text-align: center;
+            width: 35%;
+            text-align: left;
         }
         .result_amount{
-            width: 60% ;
+            width: 65% ;
         }
         .ant-select-selector,.ant-input {
             padding-left: 35px;
@@ -109,7 +110,6 @@
             }
             .ant-select-selection-item{
                 line-height: 60px;
-                
             }
         }
 
@@ -122,7 +122,7 @@
             }
             .rate_span{
                 color:#4CB6AC;
-                font-size: 42px;
+                font-size: 36px;
                 margin-bottom: 10px;
             }
         }
@@ -135,14 +135,20 @@
     }
 }
 
-@media ( max-width: 1065px){
+@media ( max-width: 1120px){
     .currency{
         .currency_initial .ant-select-selector,.ant-input {
             width: 250px !important;
         }
+        .currency_result .rate .rate_span{
+            color:#4CB6AC;
+            font-size: 30px;
+            margin-bottom: 10px;
+        }
 
     }
 }
+
 @media ( max-width: 920px){
     .currency{
         .currency_initial  {
@@ -157,7 +163,7 @@
         }
         .currency_result  {
             .rate .rate_span {
-               font-size: 34px ;
+               font-size: 26px ;
            }
         }
 
@@ -167,12 +173,21 @@
 @media ( max-width: 820px){
     .currency{
         .currency_result  {
+            padding-left: 0;
             .rate .rate_span {
-               font-size: 30px;
+               font-size: 22px;
            }
+           .result_rate{
+            width: 40%;
+            text-align: left;
+        }
+        .result_amount{
+            width: 60% ;
+        }
         }
     }
 }
+
 @media ( max-width: 700px){
     .currency .currency_wrapper h1{
         font-size: 36px;
@@ -180,35 +195,53 @@
     .currency{
         .currency_result  {
             flex-direction: column;
-            .rate .rate_span {
-               font-size: 30px;
-           }
+            
            .result_rate{
-            width: 50%;
-            text-align: left;
-        }
+                width: 100% !important;
+                text-align: left;
+            }
+            .result_amount{
+                width: 100%  !important;  
+            }
         }
     }
 }
 
-@media ( max-width: 500px){
-    .currency{
-        .currency_result  {
-            .rate .rate_span {
-               font-size: 24px;
-           }
-        }
-    }
+@media ( max-width: 510px){
+    // .currency{
+    //     .currency_result  {
+    //         .rate .rate_span {
+    //            font-size: 24px;
+    //        }
+    //     }
+    // }
 }
-@media ( max-width: 400px){
+
+@media ( max-width: 460px){
     .currency .currency_wrapper h1{
         font-size: 30px;
     }
     .currency{
+        .currency_field{
+            padding: 15px;
+        }
         .currency_result  {
             .rate .rate_span {
-               font-size: 20px;
+               font-size: 18px;
            }
+        }
+
+        .currency_initial{
+            .ant-select-selector,.ant-input {
+                height: 50px;
+                input{
+                    height: 50px !important;  
+                }
+                .ant-select-selection-item{
+                    line-height: 50px;
+                    
+                }
+            }
         }
     }
 }
@@ -230,15 +263,34 @@
                font-size: 20px;
            }
         }
-        .currency_field{
-            padding: 15px;
-        }
+
         .currency_initial{
             padding-bottom: 25px;
         }
         .currency_result{
             padding-top: 25px;
         }
+    }
+}
+@media ( max-width: 325px){
+    .currency{
+        .currency_initial{
+            .ant-select-selector,.ant-input {
+                height: 40px;
+                input{
+                    height: 40px !important;  
+                }
+                .ant-select-selection-item{
+                    line-height: 40px;
+                }
+            }
+        }
+    }
+    .currency .currency_initial .rate .rate_span {
+       margin-bottom: 0;
+    }
+    .currency .currency_result .rate h2{
+        font-size: 18px !important;
     }
 }
 

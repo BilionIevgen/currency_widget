@@ -1,5 +1,6 @@
 import React from "react";
 import { Spin } from "antd";
+import PropTypes from 'prop-types';
 
 export default function CurrencyResult({
   isFetching,
@@ -17,12 +18,13 @@ export default function CurrencyResult({
         <>
           <div className="result_rate rate">
             <h2>Rate :</h2>
-            <span className="rate_span ">{currencyRate ? currencyRate  : 1}</span>
+              <span className="rate_span "> 1 {currencyFrom} = {currencyRate ? currencyRate : 1} {currencyTo}</span>
           </div>
           <div className="result_amount rate">
             <h2>Result :</h2>
             <span className="rate_span ">
-              {currencyAmmount} {currencyFrom} ={" "}
+                {new Intl.NumberFormat().format(currencyAmmount)} {currencyFrom} =
+              {' '}
               {!currencyResult ? `${currencyAmmount} ${currencyTo}` : currencyResult}
             </span>
           </div>
@@ -32,3 +34,11 @@ export default function CurrencyResult({
   );
 }
 
+CurrencyResult.propTypes = {
+  isFetching: PropTypes.bool,
+  currencyRate: PropTypes.number,
+  currencyResult: PropTypes.number,
+  currencyFrom: PropTypes.string,
+  currencyAmmount: PropTypes.number,
+  currencyTo: PropTypes.string,
+}
