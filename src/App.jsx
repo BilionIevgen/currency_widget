@@ -14,7 +14,7 @@ function App() {
   const [isResultFull, setResultFull] = useState(false);
   const [inputError, setInputError] = useState(false);
 
-  useEffect(async () => {
+  useEffect( async() => {
     const areInputsFull = currencyFrom && currencyTo && currencyAmmount
     if (
       !inputError &&
@@ -33,7 +33,6 @@ function App() {
 
       // request data from server
       const response = await fetchData(currencyFrom);
-
       // imitating bad internet
       setTimeout(() => {
         setIsFetching(false);
