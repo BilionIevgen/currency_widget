@@ -39,7 +39,7 @@ function App() {
       }, 1000);
 
       // checking if currency from and to are equal
-      const rate = currencyFrom == currencyTo ? 1 : +response.rates[currencyTo].toFixed(2);
+      const rate = currencyFrom === currencyTo ? 1 : +response.rates[currencyTo].toFixed(2);
       
       //setting result state
       setRate(rate);
