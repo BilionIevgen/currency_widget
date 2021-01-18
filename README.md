@@ -17,7 +17,10 @@ Open [currency-widget](https://currency-widget.vercel.app/) to view DEMO in the 
 2) axios - for Promise based HTTP client (17,391,109 weekly dowloads)\
 
 ### `Technologies : `
-1) React \
-2) Scss\
-3) Hooks\
-4) Exchange rates are fetched from ​ https://api.exchangeratesapi.io​ .\
+1) React JS.
+2) Scss .
+3) Hooks (State and Effect) .
+4) Exchange rates are fetched from ​ https://api.exchangeratesapi.io​ using axios .
+5) PropTypes for checking props .
+5) ErrorBoundary for catching errors .
+6) Media Queries for responsive design .
