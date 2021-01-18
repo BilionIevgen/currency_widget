@@ -1,4 +1,6 @@
-In the React project directory, you can run:
+This is currency exchange widget.
+
+In the  project directory, you can run:
 
 ### `npm install`
 To install all dependencies
