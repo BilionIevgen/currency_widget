@@ -1,7 +1,7 @@
 import {
   currencyFrom,
   currencyTo,
-  currencyAmmount,
+  currencyAmount,
   currencyRate,
   currencyResult,
   isFetching,
@@ -13,7 +13,7 @@ import {
 const initialState = {
   currencyFrom: "",
   currencyTo: "",
-  currencyAmmount: "",
+  currencyAmount: "",
   currencyRate: "",
   currencyCashedRate: null,
   currencyResult: "",
@@ -36,10 +36,10 @@ export const exchange = (state = initialState, action) => {
         currencyTo: action.payload,
       };
 
-    case currencyAmmount:
+    case currencyAmount:
       return {
         ...state,
-        currencyAmmount: action.payload,
+        currencyAmount: action.payload,
       };
 
     case currencyRate:

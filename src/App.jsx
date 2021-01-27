@@ -5,68 +5,75 @@ import CurrencyRate from "./components/CurrencyRate";
 import {
   setFrom,
   setTo,
-  setAmmount,
+  setAmount,
   setResultFull,
   setInputError,
-  fetchCurrency,
 } from "./store/actions/exchange";
 import { useDispatch, useSelector } from "react-redux";
+import { fetchCurrency } from "./store/actions/exchengeThunks";
 
-function App() {
+export default function App () {
   const dispatch = useDispatch();
- // getting data from store 
+  // getting data from store
   const {
     currencyFrom,
     currencyTo,
-    currencyAmmount,
+    currencyAmount,
     currencyRate,
     currencyResult,
     isFetching,
     isResultFull,
     inputError,
-    currencyCashedRate
+    currencyCashedRate,
   } = useSelector(
     ({
       exchange: {
         currencyFrom,
         currencyTo,
-        currencyAmmount,
+        currencyAmount,
         currencyRate,
         currencyResult,
         isFetching,
         isResultFull,
         inputError,
-        currencyCashedRate
+        currencyCashedRate,
       },
     }) => {
       return {
         currencyFrom,
         currencyTo,
-        currencyAmmount,
+        currencyAmount,
         currencyRate,
         currencyResult,
         isFetching,
         isResultFull,
         inputError,
-        currencyCashedRate
+        currencyCashedRate,
       };
     }
   );
   // getting data from server
   useEffect(() => {
     // checking if every field is filled
-    const areInputsFull = currencyFrom && currencyTo && currencyAmmount;
+    const areInputsFull = currencyFrom && currencyTo && currencyAmount;
     if (
       !inputError &&
       areInputsFull &&
-      currencyAmmount[currencyAmmount.length - 1] !== "."
+      currencyAmount[currencyAmount.length - 1] !== "."
     ) {
-      dispatch(fetchCurrency(currencyFrom, currencyTo, currencyAmmount,currencyCashedRate));
+      dispatch(
+        fetchCurrency(
+          currencyFrom,
+          currencyTo,
+          currencyAmount,
+          currencyCashedRate
+        )
+      );
     } else {
       dispatch(setResultFull(false));
     }
     // eslint-disable-next-line
-  }, [isResultFull, currencyFrom, currencyTo, currencyAmmount]);
+  }, [isResultFull, currencyFrom, currencyTo, currencyAmount]);
 
   const onFromSelect = (val) => {
     dispatch(setFrom(val));
@@ -78,16 +85,16 @@ function App() {
 
   const onAmountInput = (val) => {
     // validation
-    const newVal = val.target.value.trim();
+    const newVal = val.target.value?.trim();
     if (isNaN(newVal)) {
       dispatch(setInputError(true));
-      dispatch(setAmmount(val.target.value));
+      dispatch(setAmount(val.target.value));
     } else {
       dispatch(setInputError(false));
       if (newVal.length > 0 && newVal[newVal.length - 1] !== ".") {
-        dispatch(setAmmount(parseFloat(newVal)));
+        dispatch(setAmount(parseFloat(newVal)));
       } else {
-        dispatch(setAmmount(newVal));
+        dispatch(setAmount(newVal));
       }
     }
   };
@@ -101,14 +108,14 @@ function App() {
             inputError={inputError}
             onFromSelect={onFromSelect}
             onToSelect={onToSelect}
-            currencyAmmount={currencyAmmount}
+            currencyAmount={currencyAmount}
             onAmountInput={onAmountInput}
           />
           {isResultFull && (
             <CurrencyResult
               currencyTo={currencyTo}
               currencyFrom={currencyFrom}
-              currencyAmmount={currencyAmmount}
+              currencyAmount={currencyAmount}
               isFetching={isFetching}
               currencyRate={currencyRate}
               currencyResult={currencyResult}
@@ -118,6 +125,4 @@ function App() {
       </div>
     </div>
   );
-}
-
-export default App;
+};

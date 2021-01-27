@@ -1,14 +1,14 @@
 import axios from "axios";
-import { CURRENCY_URL } from "../constants/api";
+import { CURRENCY_URL } from "./constants";
 
-export function fetchData(currencyFrom) {
-  return new Promise((responseProm, reject) => {
-    axios
+export const fetchData = async(currencyFrom) => {
+  try {
+    const response = await axios
       .get(`${CURRENCY_URL}latest?base=${currencyFrom}`)
-      .then(function (response) {
-        return responseProm(response.data);
-      })
-      .catch(reject);
-  });
+    return response.data;
+  } catch (error) {
+    console.error(error);
+  }
+  
 }
 
