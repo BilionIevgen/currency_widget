@@ -12,7 +12,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { fetchCurrency } from "./store/actions/exchengeThunks";
 
-export default function App () {
+export default function App() {
   const dispatch = useDispatch();
   // getting data from store
   const {
@@ -125,4 +125,4 @@ export default function App () {
       </div>
     </div>
   );
-};
+}
