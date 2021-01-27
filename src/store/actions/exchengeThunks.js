@@ -34,7 +34,9 @@ export const fetchCurrency = (
     const response = await fetchData(currencyFrom);
     // checking if currency from and to are equal
     const rate =
-      currencyFrom === currencyTo ? 1 : +response?.rates[currencyTo]?.toFixed(2);
+      currencyFrom === currencyTo
+        ? 1
+        : +response?.rates[currencyTo]?.toFixed(2);
     dispatch(setRate(rate));
     dispatch(
       setCachedRate({
