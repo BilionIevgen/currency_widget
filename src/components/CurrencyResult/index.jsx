@@ -23,26 +23,21 @@ export default function CurrencyResult({
         <h2>Result :</h2>
         <span className="rate_span ">
           {new Intl.NumberFormat().format(currencyAmount)} {currencyFrom} ={" "}
-          {!currencyResult
-            ? `${currencyAmount} ${currencyTo}`
-            : currencyResult}
+          {!currencyResult ? `${currencyAmount} ${currencyTo}` : currencyResult}
         </span>
       </div>
     </>
   );
   return (
     <div className="currency_result">
-      {isFetching ? <Spin size="large" /> :  content }
+      {isFetching ? <Spin size="large" /> : content}
     </div>
   );
 }
 
 CurrencyResult.propTypes = {
   isFetching: PropTypes.bool,
-  currencyRate: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.number
-  ]),
+  currencyRate: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   currencyResult: PropTypes.string,
   currencyFrom: PropTypes.string,
   currencyAmmount: PropTypes.number,
