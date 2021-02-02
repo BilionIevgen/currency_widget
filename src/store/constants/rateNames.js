@@ -1,0 +1,1 @@
+export const rateNames = "RATE_NAMES";

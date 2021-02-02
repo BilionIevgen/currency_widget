@@ -7,7 +7,6 @@ import {
   isFetching,
   isResultFull,
   inputError,
-  cachedRate
 } from "../constants/exchange";
 
 const initialState = {
@@ -15,7 +14,6 @@ const initialState = {
   currencyTo: "",
   currencyAmount: "",
   currencyRate: "",
-  currencyCashedRate: null,
   currencyResult: "",
   isFetching: false,
   isResultFull: false,
@@ -72,12 +70,6 @@ export const exchange = (state = initialState, action) => {
         isFetching: action.payload,
       };
     
-    case cachedRate:
-      return {
-        ...state,
-        currencyCashedRate: action.payload,
-      };
-
     default:
       return state;
   }

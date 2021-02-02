@@ -7,7 +7,6 @@ import {
   isFetching,
   isResultFull,
   inputError,
-  cachedRate,
 } from "../constants/exchange";
 
 export const setFrom = (payload) => {
@@ -66,11 +65,6 @@ export const setInputError = (payload) => {
   };
 };
 
-export const setCachedRate = (payload) => {
-  return {
-    type: cachedRate,
-    payload,
-  };
-};
+
 
 

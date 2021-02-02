@@ -6,4 +6,4 @@ export const currencyResult = "CURRENCY_RESULT";
 export const isFetching = "ISFETCHING";
 export const isResultFull = "IS_RESULT_FULL";
 export const inputError = "INPUT_ERROR";
-export const cachedRate = "CACHED_RATE";
+

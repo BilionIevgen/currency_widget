@@ -10,7 +10,7 @@ import {
   setInputError,
 } from "./store/actions/exchange";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchCurrency } from "./store/actions/exchengeThunks";
+import { fetchCurrency } from "./store/actions/thunks";
 
 export default function App() {
   const dispatch = useDispatch();
@@ -26,19 +26,20 @@ export default function App() {
     inputError,
     currencyCashedRate,
   } = useSelector(
-    ({
-      exchange: {
-        currencyFrom,
-        currencyTo,
-        currencyAmount,
-        currencyRate,
-        currencyResult,
-        isFetching,
-        isResultFull,
-        inputError,
-        currencyCashedRate,
-      },
-    }) => {
+    (store) => {
+      const{
+        exchange: {
+          currencyFrom,
+          currencyTo,
+          currencyAmount,
+          currencyRate,
+          currencyResult,
+          isFetching,
+          isResultFull,
+          inputError,
+          currencyCashedRate,
+        }
+      } = store
       return {
         currencyFrom,
         currencyTo,
@@ -51,7 +52,7 @@ export default function App() {
         currencyCashedRate,
       };
     }
-  );
+    );
   // getting data from server
   useEffect(() => {
     // checking if every field is filled
