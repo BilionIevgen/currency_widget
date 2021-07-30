@@ -1,7 +1,7 @@
-import React from "react";
-import { Input, Select } from "antd";
-import { OPTIONS } from "../../constants/currency";
-import PropTypes from "prop-types";
+import React from 'react';
+import { Input, Select } from 'antd';
+import { OPTIONS } from '../../constants/currency';
+import PropTypes from 'prop-types';
 
 const { Option } = Select;
 
@@ -12,7 +12,7 @@ export default function CurrencyRate({
   onAmountInput,
   inputError,
 }) {
-  const optionsMapping = OPTIONS?.map((item,i) => (
+  const optionsMapping = OPTIONS?.map((item, i) => (
     <Option key={i} value={item}>
       {item}
     </Option>
@@ -21,7 +21,9 @@ export default function CurrencyRate({
     <div className="currency_initial">
       <div className="rate rate_from">
         <span className="rate_span">From :</span>
-        <Select onSelect={onFromSelect}>{optionsMapping}</Select>
+        <Select onSelect={onFromSelect}>
+          <Option selected value="EUR">EUR</Option>
+        </Select>
       </div>
 
       <div className="rate rate_to">
