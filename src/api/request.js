@@ -1,12 +1,18 @@
 import axios from "axios";
-import { CURRENCY_URL } from "./constants";
 
 export const fetchData = async (currencyFrom) => {
   try {
+  //   const params = {
+  //     access_key: ACCESS_KEY,
+  //     format: 1
+  //  }
     const response = await axios.get(
-      `${CURRENCY_URL}latest?base=${currencyFrom}`
+      `http://api.exchangeratesapi.io/v1/latest?access_key=d7be9d01b04e9c91d1500e9172f24af7&format=1`
     );
-    return response.data;
+    console.log('currencyFrom',currencyFrom);
+    const resp = response.data.rates[currencyFrom]
+    console.log('resp', resp);
+    return resp;
   } catch (error) {
     console.error(error);
   }

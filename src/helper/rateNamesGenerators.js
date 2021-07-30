@@ -10,7 +10,7 @@ import {
   ILS_USD,
 } from "../constants/currency";
 
-export default (from, to) => {
+const exchange = function (from, to) {
   if (from === USD) {
     if (to === USD) {
       return USD_USD;
@@ -44,4 +44,5 @@ export default (from, to) => {
       return ILS_ILS;
     }
   }
-};
+ };
+ export default exchange

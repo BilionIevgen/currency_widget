@@ -97,12 +97,12 @@ export const fetchCurrency = (
     // showing preloader:
     dispatch(setIsFetching(true));
     // request data from server
-    const response = await fetchData(currencyFrom);
+    const dataRate = await fetchData(currencyFrom);
     // checking if currency from and to are equal
     const rate =
       currencyFrom === currencyTo
         ? 1
-        : +response?.rates[currencyTo]?.toFixed(2);
+        : +dataRate?.toFixed(2);
     dispatch(setRate(rate));
     dispatch(
       setResult(
