@@ -10,9 +10,6 @@ To install all dependencies
 Runs the app in the development mode.
 Open localhost:3000 to view it in the browser.
 
-### `DEMO`
-Open [currency-widget](https://currency-widget.vercel.app/) to view DEMO in the browser.
-
 ### `Using libraries : `
 
 1) antd - for Design (517,134 weekly dowloads) 
